@@ -1,16 +1,9 @@
-import { } from 'hono'
+import { } from "hono";
 
-type Head = {
-  title?: string
-}
+import "@hono/react-renderer";
 
-declare module 'hono' {
-  interface Env {
-    Variables: Record<string, unknown>
-    Bindings: Record<string, unknown>
-  }
-  interface ContextRenderer {
-    // biome-ignore lint/style/useShorthandFunctionType: <explanation>
-    (content: string | Promise<string>, head?: Head): Response | Promise<Response>
+declare module "@hono/react-renderer" {
+  interface Props {
+    title?: string;
   }
 }
