@@ -3,6 +3,9 @@ import pages from '@hono/vite-build/cloudflare-pages'
 import honox from 'honox/vite'
 import { defineConfig } from 'vite'
 import client from "honox/vite/client";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import mdx from '@mdx-js/rollup';
 
 export default defineConfig(({ mode }) => {
   const common = {
@@ -34,6 +37,8 @@ export default defineConfig(({ mode }) => {
     ssr: {
       external: ['react', 'react-dom'],
     },
-    plugins: [honox(), pages()],
+    plugins: [honox(), pages(), mdx({
+      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]
+    })],
   }
 })
