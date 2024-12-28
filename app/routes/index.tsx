@@ -17,14 +17,19 @@ export default createRoute(async (c) => {
 		}),
 	);
 	return c.render(
-		<main>
+		<main className="max-w-4xl mx-auto">
 			<header>
-				<h1 className="text-center scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+				<h1 className="text-center m-4 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 					群青日和
 				</h1>
+				<img
+					src="/static/hero.jpg"
+					alt="hero"
+					className="w-full max-w-4xl mx-auto"
+				/>
 			</header>
 			<section>
-				<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+				<ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 					{postEntries.map(({ id, frontmatter }) => (
 						<li key={id} className="m-4">
 							<PostCard
@@ -33,6 +38,7 @@ export default createRoute(async (c) => {
 								description={frontmatter.description}
 								url={`${id.replace(/\.mdx$/, "")}`}
 								categories={frontmatter.categories}
+								className="flex flex-col h-full"
 							/>
 						</li>
 					))}
