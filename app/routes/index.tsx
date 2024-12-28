@@ -1,5 +1,6 @@
 import { createRoute } from "honox/factory";
 import Counter from "@/islands/counter";
+import { PostCard } from "@/components/ui/PostCard";
 
 type Meta = {
 	title: string;
@@ -9,7 +10,7 @@ type Meta = {
 
 export default createRoute(async (c) => {
 	const name = c.req.query("name") ?? "Hono";
-	const posts = import.meta.glob<{ frontmatter: Meta }>("../posts/**/*.mdx");
+	const posts = import.meta.glob<{ frontmatter: Meta }>("./posts/**/*.mdx");
 	const postEntries = await Promise.all(
 		Object.entries(posts).map(async ([id, module]) => {
 			const mod = await module();
@@ -28,10 +29,12 @@ export default createRoute(async (c) => {
 					{postEntries.map(({ id, frontmatter }) => (
 						<li key={id}>
 							<a href={`${id.replace(/\.mdx$/, "")}`}>{frontmatter.title}</a>
+							<p>{frontmatter.description}</p>
 						</li>
 					))}
 				</ul>
 			</div>
+			<PostCard />
 		</div>,
 		{ title: name },
 	);
