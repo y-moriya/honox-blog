@@ -1,15 +1,14 @@
 import { createRoute } from "honox/factory";
-import Counter from "@/islands/counter";
 import { PostCard } from "@/components/ui/PostCard";
 
 type Meta = {
 	title: string;
 	date: string;
 	description: string;
+	categories?: string[];
 };
 
 export default createRoute(async (c) => {
-	const name = c.req.query("name") ?? "Hono";
 	const posts = import.meta.glob<{ frontmatter: Meta }>("./posts/**/*.mdx");
 	const postEntries = await Promise.all(
 		Object.entries(posts).map(async ([id, module]) => {
@@ -18,24 +17,33 @@ export default createRoute(async (c) => {
 		}),
 	);
 	return c.render(
-		<div>
-			<div className="m-5">
-				<h1>Hello, {name}!</h1>
-				<Counter />
-			</div>
-			<div>
-				<h2>Posts</h2>
-				<ul className="article-list">
+		<main>
+			<header>
+				<h1 className="text-center scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+					群青日和
+				</h1>
+			</header>
+			<section>
+				<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 					{postEntries.map(({ id, frontmatter }) => (
-						<li key={id}>
-							<a href={`${id.replace(/\.mdx$/, "")}`}>{frontmatter.title}</a>
-							<p>{frontmatter.description}</p>
+						<li key={id} className="m-4">
+							<PostCard
+								title={frontmatter.title}
+								date={frontmatter.date}
+								description={frontmatter.description}
+								url={`${id.replace(/\.mdx$/, "")}`}
+								categories={frontmatter.categories}
+							/>
 						</li>
 					))}
 				</ul>
-			</div>
-			<PostCard />
-		</div>,
-		{ title: name },
+			</section>
+			<footer>
+				<p className="text-center text-sm text-muted-foreground">
+					© 2024 gunjobiyori.com. All rights reserved.
+				</p>
+			</footer>
+		</main>,
+		{ title: "群青日和" },
 	);
 });
