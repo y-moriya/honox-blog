@@ -36,10 +36,10 @@ export default defineConfig(({ mode }) => {
   return {
     ...common,
     ssr: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', '@mdx-js/react', '@radix-ui/react-navigation-menu'],
     },
     plugins: [honox(), pages(), mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
-    })],
+    })]
   }
 })
