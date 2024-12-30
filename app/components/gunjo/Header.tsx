@@ -7,6 +7,7 @@ import {
 } from "@radix-ui/react-navigation-menu";
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
 
+// TODO: 現在のページを示すスタイルを追加する
 export function Header() {
 	return (
 		<header>
