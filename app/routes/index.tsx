@@ -1,5 +1,7 @@
 import { createRoute } from "honox/factory";
-import { PostCard } from "@/components/ui/PostCard";
+import { PostCard } from "@/components/gunjo/PostCard";
+import { Header } from "@/components/gunjo/Header";
+import { Footer } from "@/components/gunjo/Footer";
 
 type Meta = {
 	title: string;
@@ -16,39 +18,42 @@ export default createRoute(async (c) => {
 			return { id, frontmatter: mod.frontmatter };
 		}),
 	);
+
+	// frontmatter.dateの降順でソート
+	postEntries.sort(
+		(a, b) =>
+			new Date(b.frontmatter.date).getTime() -
+			new Date(a.frontmatter.date).getTime(),
+	);
+
+	// TODO: 各PostCardにキャッチアップ画像を追加したい
 	return c.render(
 		<main className="max-w-4xl mx-auto">
-			<header>
-				<h1 className="text-center m-4 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-					群青日和
-				</h1>
+			<Header />
+			<section>
 				<img
 					src="/static/hero.jpg"
 					alt="hero"
 					className="w-full max-w-4xl mx-auto"
 				/>
-			</header>
+			</section>
 			<section>
-				<ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
 					{postEntries.map(({ id, frontmatter }) => (
-						<li key={id} className="m-4">
+						<li key={id} className="m-2">
 							<PostCard
 								title={frontmatter.title}
 								date={frontmatter.date}
 								description={frontmatter.description}
 								url={`${id.replace(/\.mdx$/, "")}`}
 								categories={frontmatter.categories}
-								className="flex flex-col h-full"
+								className="h-full"
 							/>
 						</li>
 					))}
 				</ul>
 			</section>
-			<footer>
-				<p className="text-center text-sm text-muted-foreground">
-					© 2024 gunjobiyori.com. All rights reserved.
-				</p>
-			</footer>
+			<Footer />
 		</main>,
 		{ title: "群青日和" },
 	);

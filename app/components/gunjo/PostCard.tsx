@@ -1,6 +1,3 @@
-import { BellRing } from "lucide-react";
-
-import { cn } from "@/lib/utils";
 import {
 	Card,
 	CardContent,
@@ -9,6 +6,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { format } from "date-fns";
 
 type CardProps = React.ComponentProps<typeof Card> & {
 	title: string;
@@ -27,8 +25,10 @@ export function PostCard({
 	categories,
 	...props
 }: CardProps) {
+	const formattedDate = format(new Date(date), "yyyy/MM/dd");
+	// TODO: categoriesをリンクにする
 	return (
-		<Card className={cn("w-[380px]", className)} {...props}>
+		<Card {...props} className={className}>
 			<CardHeader>
 				<CardTitle>
 					<a href={url}>{title}</a>
@@ -43,7 +43,7 @@ export function PostCard({
 			</CardHeader>
 			<CardContent>{description}</CardContent>
 			<CardFooter>
-				<p className="text-sm text-muted-foreground">{date}</p>
+				<p className="text-sm text-muted-foreground">{formattedDate}</p>
 			</CardFooter>
 		</Card>
 	);
