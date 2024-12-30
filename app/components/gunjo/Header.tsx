@@ -12,7 +12,7 @@ export function Header() {
 		<header>
 			<div className="flex items-center justify-between">
 				<h1 className="m-4 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-					群青日和
+					<a href="/">群青日和</a>
 				</h1>
 				<NavigationMenu>
 					<NavigationMenuList className="flex space-x-4">

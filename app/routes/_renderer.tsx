@@ -1,3 +1,5 @@
+import { Footer } from "@/components/gunjo/Footer";
+import { Header } from "@/components/gunjo/Header";
 import { reactRenderer } from "@hono/react-renderer";
 import { useRequestContext } from "@hono/react-renderer";
 import type { FC, PropsWithChildren } from "react";
@@ -29,7 +31,13 @@ export default reactRenderer(({ children, title }) => {
 				)}
 				{title ? <title>{title}</title> : ""}
 			</head>
-			<body>{children}</body>
+			<body>
+				<main className="max-w-4xl mx-auto">
+					<Header />
+					{children}
+					<Footer />
+				</main>
+			</body>
 		</html>
 	);
 });
