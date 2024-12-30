@@ -31,11 +31,7 @@ export default createRoute(async (c) => {
 		<main className="max-w-4xl mx-auto">
 			<Header />
 			<section>
-				<img
-					src="/static/hero.jpg"
-					alt="hero"
-					className="w-full max-w-4xl mx-auto"
-				/>
+				<img src="/static/hero.jpg" alt="hero" className="mx-auto" />
 			</section>
 			<section>
 				<ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">

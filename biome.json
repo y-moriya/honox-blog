@@ -1,0 +1,7 @@
+{
+  "files": {
+    "ignore": [
+      "app/global.css"
+    ]
+  }
+}

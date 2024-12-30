@@ -6,6 +6,7 @@ import client from "honox/vite/client";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import mdx from '@mdx-js/rollup';
+import remarkGfm from "remark-gfm";
 
 export default defineConfig(({ mode }) => {
   const common = {
@@ -38,7 +39,7 @@ export default defineConfig(({ mode }) => {
       external: ['react', 'react-dom'],
     },
     plugins: [honox(), pages(), mdx({
-      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]
+      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
     })],
   }
 })
