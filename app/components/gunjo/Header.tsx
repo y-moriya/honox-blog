@@ -33,6 +33,13 @@ export function Header() {
 						</NavigationMenuItem>
 						<NavigationMenuItem>
 							<NavigationMenuLink>
+								<a href="/categories" className={navigationMenuTriggerStyle()}>
+									Categories
+								</a>
+							</NavigationMenuLink>
+						</NavigationMenuItem>
+						<NavigationMenuItem>
+							<NavigationMenuLink>
 								<a href="/werewolf" className={navigationMenuTriggerStyle()}>
 									Werwolf Archives
 								</a>

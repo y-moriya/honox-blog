@@ -26,7 +26,7 @@ export function MyPagination({ currentPage, totalPage }: MyPaginationProps) {
 	}
 
 	return (
-		<Pagination>
+		<Pagination className="mt-8">
 			<PaginationContent>
 				{currentPage > 1 && (
 					<PaginationItem>

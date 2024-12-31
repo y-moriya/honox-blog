@@ -1,5 +1,3 @@
-import { Footer } from "@/components/gunjo/Footer";
-import { Header } from "@/components/gunjo/Header";
 import { reactRenderer } from "@hono/react-renderer";
 
 export default reactRenderer(({ children, Layout, frontmatter }) => {

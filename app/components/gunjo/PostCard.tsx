@@ -36,7 +36,7 @@ export function PostCard({
 				<CardDescription>
 					{categories?.map((category) => (
 						<span key={category} className="text-sm text-muted-foreground">
-							{category}
+							<a href={`/categories/${category}`}>{category}</a>
 						</span>
 					))}
 				</CardDescription>

@@ -5,6 +5,7 @@ import { Hero } from "@/components/gunjo/Hero";
 import { MyPagination } from "@/components/gunjo/MyPagination";
 import { MAX_POSTS_PER_PAGE } from "@/constants";
 
+// TODO: OGP生成する
 export default createRoute(async (c) => {
 	const { posts, totalPage } = await getPaginatedPosts(1, MAX_POSTS_PER_PAGE);
 
