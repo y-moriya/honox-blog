@@ -1,4 +1,4 @@
-import type { Post } from "@/types/post";
+import type { PaginatedPosts, Post } from "@/types/post";
 
 export async function getAllPosts(): Promise<Post[]> {
   const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx");
@@ -10,8 +10,9 @@ export async function getAllPosts(): Promise<Post[]> {
   );
 }
 
-export async function getPaginatedPosts(page: number, perPage: number): Promise<Post[]> {
+export async function getPaginatedPosts(page: number, perPage: number): Promise<PaginatedPosts> {
   const allPosts = await getAllPosts();
+  const totalPage = Math.ceil(allPosts.length / perPage);
   const start = (page - 1) * perPage;
   const end = start + perPage;
 
@@ -22,5 +23,5 @@ export async function getPaginatedPosts(page: number, perPage: number): Promise<
       new Date(a.frontmatter.date).getTime(),
   );
 
-  return allPosts.slice(start, end);
+  return { posts: allPosts.slice(start, end), totalPage };
 }

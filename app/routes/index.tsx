@@ -2,15 +2,17 @@ import { createRoute } from "honox/factory";
 import { getPaginatedPosts } from "@/lib/posts";
 import { PostCardList } from "@/components/gunjo/PostCardList";
 import { Hero } from "@/components/gunjo/Hero";
+import { MyPagination } from "@/components/gunjo/MyPagination";
+import { MAX_POSTS_PER_PAGE } from "@/constants";
 
 export default createRoute(async (c) => {
-	const posts = await getPaginatedPosts(1, 10);
+	const { posts, totalPage } = await getPaginatedPosts(1, MAX_POSTS_PER_PAGE);
 
-	// TODO: pagination
 	return c.render(
 		<>
 			<Hero />
 			<PostCardList posts={posts} />
+			<MyPagination currentPage={1} totalPage={totalPage} />
 		</>,
 		{ title: "群青日和" },
 	);
