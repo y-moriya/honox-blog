@@ -26,7 +26,6 @@ export function PostCard({
 	...props
 }: CardProps) {
 	const formattedDate = format(new Date(date), "yyyy/MM/dd");
-	// TODO: categoriesをリンクにする
 	return (
 		<Card {...props} className={className}>
 			<CardHeader>
