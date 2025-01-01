@@ -1,17 +1,10 @@
-import { Footer } from "@/components/gunjo/Footer";
-import { Header } from "@/components/gunjo/Header";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import { BASE_URL } from "@/constants";
-import { reactRenderer } from "@hono/react-renderer";
-import { useRequestContext } from "@hono/react-renderer";
-import type { FC, PropsWithChildren } from "react";
+import { jsxRenderer } from "hono/jsx-renderer";
+import { Script } from "honox/server";
 
-const HasIslands: FC<PropsWithChildren> = ({ children }) => {
-	const IMPORTING_ISLANDS_ID = "__importing_islands" as const;
-	const c = useRequestContext();
-	return <>{c.get(IMPORTING_ISLANDS_ID) ? children : <></>}</>;
-};
-
-const OgpTags: FC<PropsWithChildren> = ({ children }) => {
+const OgpTags = () => {
 	const title = "群青日和";
 	const description = "群青日和は、群青が好きな人のためのブログです。";
 	const image = `${BASE_URL}/static/hero.jpg`;
@@ -25,18 +18,16 @@ const OgpTags: FC<PropsWithChildren> = ({ children }) => {
 	);
 };
 
-export default reactRenderer(({ children, title }) => {
+export default jsxRenderer(({ children, title }) => {
 	return (
 		<html lang="ja">
 			<head>
-				<meta http-equiv="content-language" content="ja" />
+				<meta httpEquiv="content-language" content="ja" />
 				<meta charSet="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				{import.meta.env.PROD ? (
 					<>
-						<HasIslands>
-							<script type="module" src="/static/client.js" />
-						</HasIslands>
+						<Script src="/static/client.js" async />
 						<link href="/static/assets/global.css" rel="stylesheet" />
 						<OgpTags />
 					</>

@@ -1,5 +1,5 @@
-import { MyPagination } from "@/components/gunjo/MyPagination";
-import { PostCardList } from "@/components/gunjo/PostCardList";
+import { Pagination } from "@/components/Pagination";
+import { PostCardList } from "@/components/PostCardList";
 import { MAX_POSTS_PER_PAGE } from "@/constants";
 import { getPaginatedPosts } from "@/lib/posts";
 import { createRoute } from "honox/factory";
@@ -14,7 +14,7 @@ export default createRoute(async (c) => {
 	return c.render(
 		<>
 			<PostCardList posts={posts} />
-			<MyPagination currentPage={page} totalPage={totalPage} />
+			<Pagination currentPage={page} totalPage={totalPage} />
 		</>,
 		{ title: "群青日和" },
 	);

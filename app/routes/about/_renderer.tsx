@@ -1,6 +1,7 @@
 import { reactRenderer } from "@hono/react-renderer";
+import { jsxRenderer } from "hono/jsx-renderer";
 
-export default reactRenderer(({ children, Layout, frontmatter }) => {
+export default jsxRenderer(({ children, Layout, frontmatter }) => {
 	return (
 		<Layout title={frontmatter.title}>
 			<div className="container mx-auto flex-1 px-0 main-container">

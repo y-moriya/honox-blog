@@ -1,4 +1,4 @@
-import { PostCardList } from "@/components/gunjo/PostCardList";
+import { PostCardList } from "@/components/PostCardList";
 import { getCategorizedPosts } from "@/lib/posts";
 import { createRoute } from "honox/factory";
 

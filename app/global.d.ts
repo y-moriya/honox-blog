@@ -1,10 +1,17 @@
-import { } from "hono";
+import { } from 'hono'
+import type { Frontmatter } from './types/frontmatter'
 
-import "@hono/react-renderer";
+type Head = {
+  title?: string;
+  frontmatter?: Frontmatter;
+}
 
-declare module "@hono/react-renderer" {
-  interface Props {
-    title?: string;
-    frontmatter?: Frontmatter;
+declare module 'hono' {
+  interface Env {
+    Variables: {}
+    Bindings: {}
+  }
+  interface ContextRenderer {
+    (content: string | Promise<string>, head?: Head): Response | Promise<Response>
   }
 }

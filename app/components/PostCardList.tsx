@@ -23,7 +23,6 @@ export function PostCardList({ posts, ...props }: PostCardListProps) {
 							description={frontmatter.description}
 							url={`${id.replace(/\.mdx$/, "")}`}
 							categories={frontmatter.categories}
-							className="h-full"
 						/>
 					</li>
 				))}
