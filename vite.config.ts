@@ -1,5 +1,5 @@
 import path from "node:path";
-import ssg from '@hono/vite-ssg'
+import ssgBuild from '@hono/vite-ssg'
 import honox from 'honox/vite'
 import { defineConfig } from 'vite'
 import client from "honox/vite/client";
@@ -9,6 +9,27 @@ import mdx from '@mdx-js/rollup';
 import remarkGfm from "remark-gfm";
 import adapter from '@hono/vite-dev-server/cloudflare'
 import build from '@hono/vite-build/cloudflare-pages'
+
+// export default defineConfig({
+//   resolve: {
+//     alias: {
+//       "@": path.resolve(__dirname, "./app"),
+//     },
+//   },
+//   plugins: [honox({ devServer: { adapter } }), build(), ssgBuild({ entry: './app/server.ts' }),
+//   mdx({
+//     jsxImportSource: 'hono/jsx',
+//     remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]
+//   })
+//   ],
+//   ssr: {
+//     external: [
+//       '@mdx-js/react',
+//       'satori',
+//       "@resvg/resvg-js",
+//     ],
+//   },
+// })
 
 export default defineConfig(({ mode }) => {
   const common = {
@@ -42,10 +63,7 @@ export default defineConfig(({ mode }) => {
     ...common,
     ssr: {
       external: [
-        'react',
-        'react-dom',
         '@mdx-js/react',
-        '@radix-ui/react-navigation-menu',
         'satori',
         "@resvg/resvg-js",
       ],
@@ -53,7 +71,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       honox({ devServer: { adapter } }),
       build(),
-      ssg({
+      ssgBuild({
         entry
       }),
       mdx({

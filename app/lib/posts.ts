@@ -1,13 +1,12 @@
 import type { PaginatedPosts, Post } from "@/types/post";
 
 export async function getAllPosts(): Promise<Post[]> {
-  const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx");
-  return Promise.all(
-    Object.entries(allPosts).map(async ([id, module]) => {
-      const mod = await module();
-      return { id: id.replace('../routes', ''), frontmatter: mod.frontmatter };
-    }),
-  );
+  const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx", {
+    eager: true,
+  });
+  return Object.entries(allPosts).map(([id, mod]) => {
+    return { id: id.replace('../routes', ''), frontmatter: mod.frontmatter };
+  });
 }
 
 export async function getPaginatedPosts(page: number, perPage: number): Promise<PaginatedPosts> {
