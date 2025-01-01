@@ -7,7 +7,6 @@ import { MAX_POSTS_PER_PAGE } from "@/constants";
 
 // TODO: OGP生成する
 // TODO: Transition API 使う
-// TODO: shadcn/ui をやめて daisyui にする
 export default createRoute(async (c) => {
 	const { posts, totalPage } = await getPaginatedPosts(1, MAX_POSTS_PER_PAGE);
 

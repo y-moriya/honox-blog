@@ -10,27 +10,6 @@ import remarkGfm from "remark-gfm";
 import adapter from '@hono/vite-dev-server/cloudflare'
 import build from '@hono/vite-build/cloudflare-pages'
 
-// export default defineConfig({
-//   resolve: {
-//     alias: {
-//       "@": path.resolve(__dirname, "./app"),
-//     },
-//   },
-//   plugins: [honox({ devServer: { adapter } }), build(), ssgBuild({ entry: './app/server.ts' }),
-//   mdx({
-//     jsxImportSource: 'hono/jsx',
-//     remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]
-//   })
-//   ],
-//   ssr: {
-//     external: [
-//       '@mdx-js/react',
-//       'satori',
-//       "@resvg/resvg-js",
-//     ],
-//   },
-// })
-
 export default defineConfig(({ mode }) => {
   const common = {
     resolve: {
