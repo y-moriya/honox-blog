@@ -1,11 +1,16 @@
 import { PostCardList } from "@/components/PostCardList";
-import { getCategorizedPosts } from "@/lib/posts";
+import { getCategories, getCategorizedPosts } from "@/lib/posts";
+import type { Env } from "hono";
+import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 
-export default createRoute(async (c) => {
+const param = ssgParams<Env>(async (c) => {
+	return (await getCategories()).map((category) => ({ category }));
+});
+
+export default createRoute(param, async (c) => {
 	const category = c.req.param("category");
 	const posts = await getCategorizedPosts(category);
-	console.log(posts);
 
 	return c.render(
 		<main>

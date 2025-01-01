@@ -37,3 +37,9 @@ export async function getCategorizedPosts(category: string): Promise<Post[]> {
 
   return allPosts.filter((post) => post.frontmatter.categories?.includes(category));
 }
+
+export async function getCategories(): Promise<string[]> {
+  const allPosts = await getAllPosts();
+  const categories = allPosts.flatMap((post) => post.frontmatter.categories ?? []);
+  return Array.from(new Set(categories));
+}

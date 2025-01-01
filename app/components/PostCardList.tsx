@@ -8,7 +8,6 @@ interface PostCardListProps {
 // TODO: 各PostCardにキャッチアップ画像を追加したい
 export function PostCardList({ posts, ...props }: PostCardListProps) {
 	if (posts.length === 0) {
-		console.log(posts);
 		return <div>No posts found.</div>;
 	}
 
