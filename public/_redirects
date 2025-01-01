@@ -1,3 +1,2 @@
-/?p=1 /posts/202412/20241217-test
-/?p=2 /posts/201305/20130511-hello-world-2
+/ p=:p /posts/:p
 /blog /
