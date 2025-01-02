@@ -4,9 +4,10 @@ import { BASE_URL } from "@/constants";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Script } from "honox/server";
 
-const OgpTags = () => {
+// TODO: 各ページのOGP設定を追加する
+const OgTags = () => {
 	const title = "群青日和";
-	const description = "群青日和は、群青が好きな人のためのブログです。";
+	const description = "事なかれ主義";
 	const image = `${BASE_URL}/static/hero.jpg`;
 	return (
 		<>
@@ -29,7 +30,7 @@ export default jsxRenderer(({ children, title }) => {
 					<>
 						<Script src="/static/client.js" async />
 						<link href="/static/assets/global.css" rel="stylesheet" />
-						<OgpTags />
+						<OgTags />
 					</>
 				) : (
 					<>

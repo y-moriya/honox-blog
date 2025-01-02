@@ -5,10 +5,9 @@ import { Hero } from "@/components/Hero";
 import { Pagination } from "@/components/Pagination";
 import { MAX_POSTS_PER_PAGE } from "@/constants";
 
-// TODO: OGP生成する
 // TODO: Transition API 使う
-export default createRoute(async (c) => {
-	const { posts, totalPage } = await getPaginatedPosts(1, MAX_POSTS_PER_PAGE);
+export default createRoute((c) => {
+	const { posts, totalPage } = getPaginatedPosts(1, MAX_POSTS_PER_PAGE);
 
 	return c.render(
 		<>

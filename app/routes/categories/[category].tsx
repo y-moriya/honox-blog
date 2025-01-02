@@ -4,13 +4,13 @@ import type { Env } from "hono";
 import { ssgParams } from "hono/ssg";
 import { createRoute } from "honox/factory";
 
-const param = ssgParams<Env>(async (c) => {
-	return (await getCategories()).map((category) => ({ category }));
+const param = ssgParams<Env>((c) => {
+	return getCategories().map((category) => ({ category }));
 });
 
-export default createRoute(param, async (c) => {
+export default createRoute(param, (c) => {
 	const category = c.req.param("category");
-	const posts = await getCategorizedPosts(category);
+	const posts = getCategorizedPosts(category);
 
 	return c.render(
 		<main>

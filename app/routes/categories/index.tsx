@@ -3,8 +3,8 @@
 import { getAllPosts } from "@/lib/posts";
 import { createRoute } from "honox/factory";
 
-export default createRoute(async (c) => {
-	const allPosts = await getAllPosts();
+export default createRoute((c) => {
+	const allPosts = getAllPosts();
 
 	// カテゴリをFrontmatterから取得し、頻度をカウントする
 	const categories = allPosts

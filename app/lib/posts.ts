@@ -1,6 +1,6 @@
 import type { PaginatedPosts, Post } from "@/types/post";
 
-export async function getAllPosts(): Promise<Post[]> {
+export function getAllPosts(): Post[] {
   const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx", {
     eager: true,
   });
@@ -9,8 +9,19 @@ export async function getAllPosts(): Promise<Post[]> {
   });
 }
 
-export async function getPaginatedPosts(page: number, perPage: number): Promise<PaginatedPosts> {
-  const allPosts = await getAllPosts();
+export function getPostById(id: string): Post {
+  const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx", {
+    eager: true,
+  });
+  const post = Object.entries(allPosts).find(([key]) => key.includes(id));
+  if (!post) {
+    throw new Error(`Post not found: ${id}`);
+  }
+  return { id: post[0].replace('../routes', ''), frontmatter: post[1].frontmatter };
+}
+
+export function getPaginatedPosts(page: number, perPage: number): PaginatedPosts {
+  const allPosts = getAllPosts();
   const totalPage = Math.ceil(allPosts.length / perPage);
   const start = (page - 1) * perPage;
   const end = start + perPage;
@@ -25,8 +36,8 @@ export async function getPaginatedPosts(page: number, perPage: number): Promise<
   return { posts: allPosts.slice(start, end), totalPage };
 }
 
-export async function getCategorizedPosts(category: string): Promise<Post[]> {
-  const allPosts = await getAllPosts();
+export function getCategorizedPosts(category: string): Post[] {
+  const allPosts = getAllPosts();
 
   // frontmatter.dateの降順でソート
   allPosts.sort(
@@ -38,8 +49,8 @@ export async function getCategorizedPosts(category: string): Promise<Post[]> {
   return allPosts.filter((post) => post.frontmatter.categories?.includes(category));
 }
 
-export async function getCategories(): Promise<string[]> {
-  const allPosts = await getAllPosts();
+export function getCategories(): string[] {
+  const allPosts = getAllPosts();
   const categories = allPosts.flatMap((post) => post.frontmatter.categories ?? []);
   return Array.from(new Set(categories));
 }

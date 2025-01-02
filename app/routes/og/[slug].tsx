@@ -1,26 +1,29 @@
-import { getAllPosts } from "@/lib/posts";
+import { getAllPosts, getPostById } from "@/lib/posts";
 import { createRoute } from "honox/factory";
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
+import type { Env } from "hono";
+import { ssgParams } from "hono/ssg";
 
-export default createRoute(async (c) => {
+const param = ssgParams<Env>((c) => {
+	const params: { slug: string }[] = [];
+	const allPosts = getAllPosts();
+	for (const post of allPosts) {
+		params.push({ slug: post.id.replace("/posts/", "").replace(".mdx", "") });
+	}
+	return params;
+});
+
+export default createRoute(param, async (c) => {
 	const slug = c.req.param("slug");
 	if (slug === ":slug") {
 		c.status(404);
 		return c.text("Not Found");
 	}
 
-	const posts = await getAllPosts();
-	const post = posts[0];
-
+	const post = getPostById(slug);
 	const titleLen = post?.frontmatter.title.length ?? 0;
-
-	const isBlamePost =
-		post?.frontmatter.title === "過去は他責で考え未来は自責で考える";
-	const splitedTitle = isBlamePost
-		? ["過去は他責で考え", "未来は自責で考える"]
-		: post?.frontmatter.title.split(" ");
-
+	const splitedTitle = post?.frontmatter.title.split(" ");
 	const notoSansBold = await loadGoogleFont({
 		family: "Noto Sans JP",
 		weight: 600,
@@ -37,19 +40,14 @@ export default createRoute(async (c) => {
 	};
 
 	const svg = await satori(
-		<div tw={"bg-[#FFCB67] w-full h-full flex p-9"}>
+		<div tw={"bg-blue-500 w-full h-full flex p-9"}>
 			<div
 				tw={
-					"bg-[#FFFBEC] rounded-3xl border-solid w-full flex flex-col justify-end"
+					"bg-blue-50 rounded-3xl border-solid w-full flex flex-col justify-end"
 				}
 			>
 				<div tw={"flex w-full flex-1 items-center mt-10 px-34"}>
-					<div
-						tw={`flex justify-center  text-[${
-							// 要調整
-							getTextSize()
-						}rem] flex-wrap`}
-					>
+					<div tw={`flex justify-center  text-[${getTextSize()}rem] flex-wrap`}>
 						{splitedTitle.map((s) => (
 							<span key={s}>{s}</span>
 						))}
@@ -64,7 +62,7 @@ export default createRoute(async (c) => {
 						<img
 							alt="avatar"
 							tw="rounded-full mr-4 w-18 h-18"
-							src="https://avatars.githubusercontent.com/u/24749358?v=4&s=100"
+							src="https://0.gravatar.com/avatar/af76ccb150b6650affe4bb1f4b315df567ceb0a807aae400a38280a5a024d3ac?size=512"
 						/>
 						群青日和
 					</div>
@@ -74,7 +72,7 @@ export default createRoute(async (c) => {
 							fontFamily: "Noto Sans JP",
 						}}
 					>
-						blog.mooriii.com
+						gunjobiyori.com
 					</h1>
 				</div>
 			</div>
@@ -92,8 +90,6 @@ export default createRoute(async (c) => {
 			],
 		},
 	);
-
-	// const body = await sharp(Buffer.from(svg)).png().toBuffer();
 
 	const body = new Resvg(svg).render().asPng();
 	const bodyArray = new Uint8Array(body);
