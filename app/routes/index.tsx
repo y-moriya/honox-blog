@@ -11,7 +11,7 @@ export default createRoute((c) => {
 
 	return c.render(
 		<>
-			<Hero />
+			{/* <Hero /> */}
 			<PostCardList posts={posts} />
 			<Pagination currentPage={1} totalPage={totalPage} />
 		</>,
