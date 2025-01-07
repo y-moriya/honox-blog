@@ -1,25 +1,22 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { BASE_URL } from "@/constants";
-import { jsxRenderer } from "hono/jsx-renderer";
+import { BASE_URL, BLOG_TITLE } from "@/constants";
+import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { Script } from "honox/server";
 
-// TODO: 各ページのOGP設定を追加する
-const OgTags = () => {
-	const title = "群青日和";
-	const description = "事なかれ主義";
-	const image = `${BASE_URL}/static/hero.jpg`;
-	return (
-		<>
-			<meta property="og:title" content={title} />
-			<meta property="og:description" content={description} />
-			<meta property="og:image" content={image} />
-			<meta name="twitter:card" content="summary_large_image" />
-		</>
-	);
-};
+export default jsxRenderer(({ children, title, frontmatter }) => {
+	const pageTitle = title ? `${title} - ${BLOG_TITLE}` : BLOG_TITLE;
+	const description = frontmatter?.description || "事なかれ主義";
+	const c = useRequestContext();
+	const pagePath = c.req.path;
+	// pagePathの最後のpathを取得
+	const pageName = pagePath.split("/").pop();
+	// pagePathにpostsが含まれる場合は記事ページのため、OGPを設定
+	const isPostPage = pagePath.includes("posts");
+	const image = isPostPage
+		? `${BASE_URL}/og/${pageName}.png`
+		: `${BASE_URL}/static/hero.jpg`;
 
-export default jsxRenderer(({ children, title }) => {
 	return (
 		<html lang="ja">
 			<head>
@@ -28,9 +25,11 @@ export default jsxRenderer(({ children, title }) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				{import.meta.env.PROD ? (
 					<>
+						<meta property="og:url" content={`${BASE_URL}${pagePath}`} />
+						<meta property="og:image" content={image} />
+						<meta property="twitter:image" content={image} />
 						<Script src="/static/client.js" async />
 						<link href="/static/assets/global.css" rel="stylesheet" />
-						<OgTags />
 					</>
 				) : (
 					<>
@@ -38,7 +37,15 @@ export default jsxRenderer(({ children, title }) => {
 						<link href="/app/global.css" rel="stylesheet" />
 					</>
 				)}
-				{title ? <title>{title}</title> : ""}
+				<meta property="og:type" content="article" />
+				<meta property="og:title" content={pageTitle} />
+				<meta property="og:description" content={description} />
+				<meta property="og:site_name" content={BLOG_TITLE} />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:site" content="@euro_s" />
+				<meta name="twitter:title" content={pageTitle} />
+				<meta name="twitter:description" content={description} />
+				<title>{pageTitle}</title>
 			</head>
 			<body>
 				<main className="max-w-4xl mx-auto">

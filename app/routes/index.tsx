@@ -15,6 +15,5 @@ export default createRoute((c) => {
 			<PostCardList posts={posts} />
 			<Pagination currentPage={1} totalPage={totalPage} />
 		</>,
-		{ title: "群青日和" },
 	);
 });
