@@ -5,7 +5,6 @@ import { Hero } from "@/components/Hero";
 import { Pagination } from "@/components/Pagination";
 import { MAX_POSTS_PER_PAGE } from "@/constants";
 
-// TODO: Transition API 使う
 export default createRoute((c) => {
 	const { posts, totalPage } = getPaginatedPosts(1, MAX_POSTS_PER_PAGE);
 

@@ -19,7 +19,7 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 		: `${BASE_URL}/static/hero.jpg`;
 
 	return (
-		<html lang="ja">
+		<html lang="ja" data-theme="nord">
 			<head>
 				<meta httpEquiv="content-language" content="ja" />
 				<meta charSet="UTF-8" />
