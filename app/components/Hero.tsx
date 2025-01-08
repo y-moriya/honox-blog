@@ -1,7 +1,7 @@
 export function Hero() {
 	return (
 		<section>
-			<img src="/static/hero.jpg" alt="hero" class="mx-auto" />
+			<img src="/static/hero.jpg" alt="gunjobiyori" class="mx-auto" />
 		</section>
 	);
 }

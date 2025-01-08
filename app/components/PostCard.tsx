@@ -21,9 +21,10 @@ export function PostCard({
 	const viewTransitionStyleTitle = `view-transition-name:title-${viewTransitionUrl}`;
 	const viewTransitionStyleDescription = `view-transition-name:description-${viewTransitionUrl}`;
 	const viewTransitionStyleCategory = `view-transition-name:category-${viewTransitionUrl}`;
+	const viewTransitionStyleDate = `view-transition-name:date-${viewTransitionUrl}`;
 
 	return (
-		<div class="card bg-base-100 w-auto border shadow-sm h-full">
+		<div class="card bg-base-100 w-auto border border-gray-700 shadow-sm h-full">
 			<div class="card-body">
 				<h2 class="card-title">
 					<a href={url} style={viewTransitionStyleTitle}>
@@ -35,7 +36,9 @@ export function PostCard({
 					categories={categories ?? []}
 				/>
 				<p style={viewTransitionStyleDescription}>{description}</p>
-				<p class="text-sm text-muted-foreground">{formattedDate}</p>
+				<p class="text-sm text-gray-500" style={viewTransitionStyleDate}>
+					{formattedDate}
+				</p>
 			</div>
 		</div>
 	);

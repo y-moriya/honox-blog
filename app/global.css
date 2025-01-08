@@ -11,6 +11,7 @@
 
 @view-transition {
   navigation: auto;
+  transition-duration: 1s;
 }
 
 .markdown {
