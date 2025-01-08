@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { Category } from "./Category";
 
 type CardProps = {
 	title: string;
@@ -29,13 +30,10 @@ export function PostCard({
 						{title}
 					</a>
 				</h2>
-				<p>
-					{categories?.map((category) => (
-						<span key={category} class="text-sm text-muted-foreground">
-							<a href={`/categories/${category}`}>#{category}</a>
-						</span>
-					))}
-				</p>
+				<Category
+					viewTransitionStyleCategory={viewTransitionStyleCategory}
+					categories={categories ?? []}
+				/>
 				<p style={viewTransitionStyleDescription}>{description}</p>
 				<p class="text-sm text-muted-foreground">{formattedDate}</p>
 			</div>

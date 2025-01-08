@@ -20,7 +20,7 @@ export default createRoute((c) => {
 	// カテゴリの一覧を表示する
 	return c.render(
 		<main class="markdown">
-			<h1>カテゴリ一覧</h1>
+			<h1 class="text-center">カテゴリ一覧</h1>
 			<ul>
 				{Object.entries(categories).map(([category, count]) => (
 					<li key={category}>
@@ -31,6 +31,6 @@ export default createRoute((c) => {
 				))}
 			</ul>
 		</main>,
-		{ title: "カテゴリ一覧 - 群青日和" },
+		{ title: "カテゴリ一覧" },
 	);
 });
