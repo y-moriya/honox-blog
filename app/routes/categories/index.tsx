@@ -19,7 +19,7 @@ export default createRoute((c) => {
 
 	// カテゴリの一覧を表示する
 	return c.render(
-		<main className="markdown">
+		<main class="markdown">
 			<h1>カテゴリ一覧</h1>
 			<ul>
 				{Object.entries(categories).map(([category, count]) => (

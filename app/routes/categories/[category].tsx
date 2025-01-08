@@ -14,8 +14,8 @@ export default createRoute(param, (c) => {
 
 	return c.render(
 		<main>
-			<header className="markdown">
-				<h1 className="text-center">#{category}</h1>
+			<header class="markdown">
+				<h1 class="text-center">#{category}</h1>
 			</header>
 			<PostCardList posts={posts} />
 		</main>,

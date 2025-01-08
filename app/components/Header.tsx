@@ -10,11 +10,6 @@ export function Header() {
 			<div class="flex-none">
 				<ul class="menu menu-horizontal px-1">
 					<li>
-						<a href="/blog" class="font-bold">
-							Blog
-						</a>
-					</li>
-					<li>
 						<a href="/about" class="font-bold">
 							About
 						</a>

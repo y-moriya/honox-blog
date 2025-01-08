@@ -13,9 +13,9 @@ export function PostCardList({ posts, ...props }: PostCardListProps) {
 
 	return (
 		<section>
-			<ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+			<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
 				{posts.map(({ id, frontmatter }) => (
-					<li key={id} className="m-2">
+					<li key={id} class="m-2">
 						<PostCard
 							title={frontmatter.title}
 							date={frontmatter.date}

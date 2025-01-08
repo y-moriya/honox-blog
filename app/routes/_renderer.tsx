@@ -1,6 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { BASE_URL, BLOG_TITLE } from "@/constants";
+import { html } from "hono/html";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { Script } from "honox/server";
 
@@ -30,6 +31,7 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 						<meta property="twitter:image" content={image} />
 						<Script src="/static/client.js" async />
 						<link href="/static/assets/global.css" rel="stylesheet" />
+						<GoogleAnalytics />
 					</>
 				) : (
 					<>
@@ -48,7 +50,7 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 				<title>{pageTitle}</title>
 			</head>
 			<body>
-				<main className="max-w-4xl mx-auto">
+				<main class="max-w-4xl mx-auto">
 					<Header />
 					{children}
 					<Footer />
@@ -57,3 +59,23 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 		</html>
 	);
 });
+
+const GoogleAnalytics = () => {
+	return (
+		<>
+			<script
+				async
+				src="https://www.googletagmanager.com/gtag/js?id=G-N4XDQGX0C4"
+			/>
+			{html`
+				<script>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+
+					gtag('config', 'G-N4XDQGX0C4');
+				</script>
+      `}
+		</>
+	);
+};

@@ -16,11 +16,18 @@ export function PostCard({
 	categories,
 }: CardProps) {
 	const formattedDate = format(new Date(date), "yyyy/MM/dd");
+	const viewTransitionUrl = url.split("/").pop();
+	const viewTransitionStyleTitle = `view-transition-name:title-${viewTransitionUrl}`;
+	const viewTransitionStyleDescription = `view-transition-name:description-${viewTransitionUrl}`;
+	const viewTransitionStyleCategory = `view-transition-name:category-${viewTransitionUrl}`;
+
 	return (
 		<div class="card bg-base-100 w-auto border shadow-sm h-full">
 			<div class="card-body">
 				<h2 class="card-title">
-					<a href={url}>{title}</a>
+					<a href={url} style={viewTransitionStyleTitle}>
+						{title}
+					</a>
 				</h2>
 				<p>
 					{categories?.map((category) => (
@@ -29,7 +36,7 @@ export function PostCard({
 						</span>
 					))}
 				</p>
-				<p>{description}</p>
+				<p style={viewTransitionStyleDescription}>{description}</p>
 				<p class="text-sm text-muted-foreground">{formattedDate}</p>
 			</div>
 		</div>
