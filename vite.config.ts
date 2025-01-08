@@ -7,8 +7,6 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import mdx from '@mdx-js/rollup';
 import remarkGfm from "remark-gfm";
-import adapter from '@hono/vite-dev-server/cloudflare'
-import build from '@hono/vite-build/cloudflare-pages'
 
 export default defineConfig(({ mode }) => {
   const common = {
@@ -48,7 +46,7 @@ export default defineConfig(({ mode }) => {
       ],
     },
     plugins: [
-      honox({ devServer: { adapter } }),
+      honox(),
       ssg({
         entry
       }),
