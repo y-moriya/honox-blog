@@ -1,4 +1,4 @@
-import { Category } from "@/components/Category";
+import { Category } from "@/components/category";
 import { format } from "date-fns";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 

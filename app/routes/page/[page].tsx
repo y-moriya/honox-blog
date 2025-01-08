@@ -1,5 +1,5 @@
-import { Pagination } from "@/components/Pagination";
-import { PostCardList } from "@/components/PostCardList";
+import { Pagination } from "@/components/pagination";
+import { PostCardList } from "@/components/post-card-list";
 import { MAX_POSTS_PER_PAGE } from "@/constants";
 import { getAllPosts, getPaginatedPosts } from "@/lib/posts";
 import { createRoute } from "honox/factory";

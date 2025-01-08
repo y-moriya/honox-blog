@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Category } from "./Category";
+import { Category } from "./category";
 
 type CardProps = {
 	title: string;

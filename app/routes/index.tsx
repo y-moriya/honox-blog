@@ -1,8 +1,8 @@
 import { createRoute } from "honox/factory";
 import { getPaginatedPosts } from "@/lib/posts";
-import { PostCardList } from "@/components/PostCardList";
-import { Hero } from "@/components/Hero";
-import { Pagination } from "@/components/Pagination";
+import { PostCardList } from "@/components/post-card-list";
+import { Hero } from "@/components/hero";
+import { Pagination } from "@/components/pagination";
 import { MAX_POSTS_PER_PAGE } from "@/constants";
 
 export default createRoute((c) => {

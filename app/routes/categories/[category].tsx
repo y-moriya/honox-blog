@@ -1,4 +1,4 @@
-import { PostCardList } from "@/components/PostCardList";
+import { PostCardList } from "@/components/post-card-list";
 import { getCategories, getCategorizedPosts } from "@/lib/posts";
 import type { Env } from "hono";
 import { ssgParams } from "hono/ssg";
