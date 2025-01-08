@@ -1,0 +1,29 @@
+---
+title: "【PS Remote Play】iPad Pro に Xbox Wireless Controller をペアリングしていると PS5 に接続できない(80001fff)"
+date: "2022-04-27"
+categories:
+  - "日記"
+---
+
+## 現象
+
+iPad Pro から PS Remote Play で ローカルの PS5 に接続しようとしたらエラーになってしまった。
+
+<img src="/static/images/img_0093.png" alt="エラー画面1" />
+
+もう一度やり直すと別のユーザーがリモートプレイしていると言われる。もちろん他の端末からは何もしていない。
+
+<img src="/static/images/img_0094.png" alt="エラー画面2" />
+
+結論から言うと Xbox Wireless Controller をペアリングしているせいだった。一体どういう原理なのかは不明。
+
+環境は以下の通り。
+
+- iPad Pro 第3世代 11inch iPadOS 15.4.1
+- Xbox ワイヤレスコントローラー
+- Play Station 5 ver. 22.01-05.02.00.03-00.00.00.0.1
+- PS Remote Play ver. 5.0.0
+
+## 対処法
+
+PS5 への接続時にコントローラの電源を切っておけば問題なく動作する。接続後にコントローラの電源を入れるとちゃんと使えるようになる。若干面倒ではあるが、この手順を踏めばエラーは発生しない。

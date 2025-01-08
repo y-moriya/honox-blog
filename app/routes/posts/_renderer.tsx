@@ -3,10 +3,9 @@ import { format } from "date-fns";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 
 export default jsxRenderer(({ children, Layout, frontmatter }) => {
-	const formattedDate = format(
-		new Date(frontmatter?.date ?? new Date()),
-		"yyyy/MM/dd",
-	);
+	const formattedDate = frontmatter?.date
+		? format(new Date(frontmatter.date), "yyyy/MM/dd")
+		: "";
 	const c = useRequestContext();
 	const pagePath = c.req.path;
 	const pageName = pagePath.split("/").pop();
