@@ -1,5 +1,5 @@
 import path from "node:path";
-import ssgBuild from '@hono/vite-ssg'
+import ssg from '@hono/vite-ssg'
 import honox from 'honox/vite'
 import { defineConfig } from 'vite'
 import client from "honox/vite/client";
@@ -49,8 +49,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       honox({ devServer: { adapter } }),
-      build(),
-      ssgBuild({
+      ssg({
         entry
       }),
       mdx({
