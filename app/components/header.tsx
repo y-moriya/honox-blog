@@ -5,6 +5,7 @@ export function Header() {
 	const pagePath = c.req.path;
 	const pageName = pagePath.split("/").pop();
 	const focused = (path: string) => (path === pageName ? "focus" : "");
+	// TODO: ハンバーガーメニューにする
 	return (
 		<header class="navbar bg-base-100 border-b border-gray-300">
 			<div class="flex-1">
@@ -14,6 +15,11 @@ export function Header() {
 			</div>
 			<div class="flex-none">
 				<ul class="menu menu-horizontal px-1">
+					<li>
+						<a href="/" class={`font-bold ${focused("top")}`}>
+							Top
+						</a>
+					</li>
 					<li>
 						<a href="/about" class={`font-bold ${focused("about")}`}>
 							About

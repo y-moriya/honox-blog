@@ -3,7 +3,7 @@ import { Header } from "@/components/header";
 import { BASE_URL, BLOG_TITLE } from "@/constants";
 import { html } from "hono/html";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
-import { Script } from "honox/server";
+import { Link, Script } from "honox/server";
 
 export default jsxRenderer(({ children, title, frontmatter }) => {
 	const pageTitle = title ? `${title} - ${BLOG_TITLE}` : BLOG_TITLE;
@@ -30,13 +30,13 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 						<meta property="og:image" content={image} />
 						<meta property="twitter:image" content={image} />
 						<Script src="/static/client.js" async />
-						<link href="/static/assets/global.css" rel="stylesheet" />
+						<Link href="/static/assets/global.css" rel="stylesheet" />
 						<GoogleAnalytics />
 					</>
 				) : (
 					<>
 						<script type="module" src="/app/client.ts" />
-						<link href="/app/global.css" rel="stylesheet" />
+						<Link href="/app/global.css" rel="stylesheet" />
 					</>
 				)}
 				<meta property="og:type" content="article" />

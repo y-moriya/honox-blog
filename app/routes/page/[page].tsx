@@ -16,6 +16,7 @@ const param = ssgParams<Env>((c) => {
 	return params;
 });
 
+// TODO: page番号をタイトルにする？
 export default createRoute(param, (c) => {
 	const page = Number(c.req.param("page"));
 	const { posts, totalPage } = getPaginatedPosts(page, MAX_POSTS_PER_PAGE);
@@ -25,6 +26,5 @@ export default createRoute(param, (c) => {
 			<PostCardList posts={posts} />
 			<Pagination currentPage={page} totalPage={totalPage} />
 		</>,
-		{ title: "群青日和" },
 	);
 });
