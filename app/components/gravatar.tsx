@@ -3,8 +3,8 @@ export function Gravatar() {
 		<iframe
 			title="Gravatar"
 			src="https://gravatar.com/euro21st.card"
-			width="415"
 			height="350"
+			class="w-full"
 			style="border:0; margin:0; padding:0;"
 		/>
 	);

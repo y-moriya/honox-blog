@@ -29,7 +29,7 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 						<meta property="og:url" content={`${BASE_URL}${pagePath}`} />
 						<meta property="og:image" content={image} />
 						<meta property="twitter:image" content={image} />
-						<Script src="/static/client.js" async />
+						<script type="module" src="/static/client.js" />
 						<link href="/static/assets/global.css" rel="stylesheet" />
 						<GoogleAnalytics />
 					</>
