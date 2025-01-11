@@ -16,7 +16,6 @@ const param = ssgParams<Env>((c) => {
 	return params;
 });
 
-// TODO: page番号をタイトルにする？
 export default createRoute(param, (c) => {
 	const page = Number(c.req.param("page"));
 	const { posts, totalPage } = getPaginatedPosts(page, MAX_POSTS_PER_PAGE);

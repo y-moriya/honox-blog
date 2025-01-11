@@ -1,4 +1,5 @@
 import { Category } from "@/components/category";
+import { Gravatar } from "@/components/gravatar";
 import { format } from "date-fns";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 
@@ -42,6 +43,7 @@ export default jsxRenderer(({ children, Layout, frontmatter }) => {
 					{children}
 				</div>
 			</div>
+			<Gravatar />
 		</Layout>
 	);
 });
