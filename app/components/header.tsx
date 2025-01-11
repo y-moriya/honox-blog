@@ -21,7 +21,7 @@ export function Header() {
 						</a>
 					</li>
 					<li>
-						<a href="/about" class={`font-bold ${focused("about")}`}>
+						<a href="/fixed/about" class={`font-bold ${focused("about")}`}>
 							About
 						</a>
 					</li>
@@ -31,7 +31,10 @@ export function Header() {
 						</a>
 					</li>
 					<li>
-						<a href="/werewolf" class={`font-bold ${focused("werewolf")}`}>
+						<a
+							href="/fixed/werewolf-archives"
+							class={`font-bold ${focused("werewolf")}`}
+						>
 							Werewolf Archives
 						</a>
 					</li>
