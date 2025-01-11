@@ -3,10 +3,13 @@ import { getPaginatedPosts } from "@/lib/posts";
 import { PostCardList } from "@/components/post-card-list";
 import { Hero } from "@/components/hero";
 import { Pagination } from "@/components/pagination";
-import { MAX_POSTS_PER_PAGE } from "@/constants";
+import { SITE_CONFIG } from "@/constants/config";
 
 export default createRoute((c) => {
-	const { posts, totalPage } = getPaginatedPosts(1, MAX_POSTS_PER_PAGE);
+	const { posts, totalPage } = getPaginatedPosts(
+		1,
+		SITE_CONFIG.pagination.postsPerPage,
+	);
 
 	return c.render(
 		<>

@@ -1,13 +1,14 @@
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { BASE_URL, BLOG_TITLE } from "@/constants";
+import { SITE_CONFIG } from "@/constants/config";
 import { html } from "hono/html";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
-import { Script } from "honox/server";
 
 export default jsxRenderer(({ children, title, frontmatter }) => {
-	const pageTitle = title ? `${title} - ${BLOG_TITLE}` : BLOG_TITLE;
-	const description = frontmatter?.description || "事なかれ主義";
+	const pageTitle = title
+		? `${title} - ${SITE_CONFIG.title}`
+		: SITE_CONFIG.title;
+	const description = frontmatter?.description || SITE_CONFIG.description;
 	const c = useRequestContext();
 	const pagePath = c.req.path;
 	// pagePathの最後のpathを取得
@@ -15,8 +16,8 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 	// pagePathにpostsが含まれる場合は記事ページのため、OGPを設定
 	const isPostPage = pagePath.includes("posts");
 	const image = isPostPage
-		? `${BASE_URL}/og/${pageName}.png`
-		: `${BASE_URL}/static/hero.jpg`;
+		? `${SITE_CONFIG.baseUrl}/og/${pageName}.png`
+		: `${SITE_CONFIG.baseUrl}${SITE_CONFIG.defaultOgImage}`;
 
 	return (
 		<html lang="ja" data-theme="nord">
@@ -26,7 +27,10 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				{import.meta.env.PROD ? (
 					<>
-						<meta property="og:url" content={`${BASE_URL}${pagePath}`} />
+						<meta
+							property="og:url"
+							content={`${SITE_CONFIG.baseUrl}${pagePath}`}
+						/>
 						<meta property="og:image" content={image} />
 						<meta property="twitter:image" content={image} />
 						<script type="module" src="/static/client.js" />
@@ -42,7 +46,7 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 				<meta property="og:type" content="article" />
 				<meta property="og:title" content={pageTitle} />
 				<meta property="og:description" content={description} />
-				<meta property="og:site_name" content={BLOG_TITLE} />
+				<meta property="og:site_name" content={SITE_CONFIG.title} />
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:site" content="@euro_s" />
 				<meta name="twitter:title" content={pageTitle} />

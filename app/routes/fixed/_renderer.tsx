@@ -1,9 +1,10 @@
+import { SITE_CONFIG } from "@/constants/config";
 import { format } from "date-fns";
 import { jsxRenderer } from "hono/jsx-renderer";
 
 export default jsxRenderer(({ children, Layout, frontmatter }) => {
 	const formattedDate = frontmatter?.date
-		? format(new Date(frontmatter.date), "yyyy/MM/dd")
+		? format(new Date(frontmatter.date), SITE_CONFIG.dateFormat)
 		: "";
 	return (
 		<Layout title={frontmatter?.title}>

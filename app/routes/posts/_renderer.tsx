@@ -1,11 +1,12 @@
 import { Category } from "@/components/category";
 import { Gravatar } from "@/components/gravatar";
+import { SITE_CONFIG } from "@/constants/config";
 import { format } from "date-fns";
 import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 
 export default jsxRenderer(({ children, Layout, frontmatter }) => {
 	const formattedDate = frontmatter?.date
-		? format(new Date(frontmatter.date), "yyyy/MM/dd")
+		? format(new Date(frontmatter.date), SITE_CONFIG.dateFormat)
 		: "";
 	const c = useRequestContext();
 	const pagePath = c.req.path;

@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { Category } from "./category";
+import { SITE_CONFIG } from "@/constants/config";
 
 type CardProps = {
 	title: string;
@@ -16,7 +17,7 @@ export function PostCard({
 	url,
 	categories,
 }: CardProps) {
-	const formattedDate = format(new Date(date), "yyyy/MM/dd");
+	const formattedDate = format(new Date(date), SITE_CONFIG.dateFormat);
 	const viewTransitionUrl = url.split("/").pop();
 	const viewTransitionStyleTitle = `view-transition-name:title-${viewTransitionUrl}`;
 	const viewTransitionStyleDescription = `view-transition-name:description-${viewTransitionUrl}`;
