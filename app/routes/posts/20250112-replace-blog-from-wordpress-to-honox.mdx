@@ -1,0 +1,50 @@
+---
+title: "ブログをWordPressからHonoXに移行しました"
+date: "2025-01-12"
+description: "WordPressで運営していた群青日和というブログサイトを、HonoXというフレームワークに移行しました。さくらのレンタルサーバでホストしていたのを、ViteでSSGしてCloudflare Pagesにデプロイしています。"
+categories:
+  - "日記"
+  - "技術系"
+---
+
+年末年始の休みが長すぎたのでブログを移行しました。
+
+元のWordPressは、さくらのレンタルサーバのライトプランでSQLiteを無理やり使ってホストしていたので、
+バージョンアップに失敗したりトラブルも多く、自前でブログを構築することにしました。
+
+ブログを乱立するのが好きなので（？）、過去にはGatzbyを使った静的サイトを立てたりもしていましたが、
+普段の趣味開発でHonoを使った簡単なWebアプリを立てることが多く、HonoをベースにしたフレームワークであるHonoXを
+使ってみることにしました。
+
+最初reactRendererを使おうとして上手くいかなかったので、参考サイトで多く用いられていたjsxRendererに戻しました。
+reactRendererでSSGできなかったのは後で調査してみたいです。試行錯誤していたので自分が悪い可能性がまあまあある。
+
+元サイトは十数年運営していたにも関わらず、記事数が数十くらいしかなかったので、
+記事の移行はだいたい力技でやりました。
+2024年は結局元サイトのWordPressで記事を書きませんでしたが、今年はもうちょっと何か書きたいですね。
+移行後サイトも最低限のことしかできていないので、改善したい項目がいくつも積みあがっています。
+
+読者はあまり居なさそうなブログですが、もしここまで読まれた方がいたら、今年もよろしくお願いします。
+
+以下、簡単な技術的メモ
+
+## 主にやったこと
+
+- SSGビルド
+- View Transitions API
+- OGP用画像の生成
+- Tailwindcss / Daisyui でスタイリング
+- ページング
+- 移行元サイトからのリダイレクト
+- Gravatarを使ったプロフィールカードの表示
+
+などです。[コードはGitHubで公開](https://github.com/y-moriya/honox-blog)しています。
+
+## 参考にしたサイト・記事
+
+- [HonoXのSSGで個人ブログを構築しました - mooriii's blog](https://blog.mooriii.com/entry/honox-ssg-blog)
+- [フルスタック Web フレームワーク HonoX を使ってみる - azukiazusaのテックブログ2](https://azukiazusa.dev/blog/full-stack-web-framework-honox/)
+- [個人ブログをHonoXに作り変えました - KITUNE IS GOOD](https://sori883.dev/posts/remake_blog_architecture/)
+- [日記サイトをHonoXに移行した。 - QLITRE DIALY](https://qlitre-dialy.ink/post/migrating-from-hono-to-honox)
+- [個人ブログをHugoからHonoに移行しました - ぷらすのブログ](https://blog.p1ass.com/posts/migrate-to-hono/)
+- [ブログシステムをHonoXに移行しました - NISLOG](https://blog.nismit.me/post/2024/04/move-to-hono)
