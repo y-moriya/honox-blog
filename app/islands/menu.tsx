@@ -64,6 +64,11 @@ export function Menu({ pageName }: MenuProps) {
 							Werewolf Archives
 						</a>
 					</li>
+					<li>
+						<a href="/rss.xml" class={`font-bold ${focused("rss.xml")}`}>
+							RSS
+						</a>
+					</li>
 				</ul>
 			</div>
 		</>
