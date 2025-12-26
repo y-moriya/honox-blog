@@ -2,9 +2,10 @@ import type { PaginatedPosts, Post } from "@/types/post";
 
 export function getAllPosts(): Post[] {
   const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx", {
-    eager: true,
+    eager: true
   });
-  return Object.entries(allPosts).map(([id, mod]) => {
+  const notDraftPosts = Object.entries(allPosts).filter(([_, mod]) => !mod.frontmatter.draft);
+  return notDraftPosts.map(([id, mod]) => {
     return { id: id.replace('../routes', ''), frontmatter: mod.frontmatter };
   });
 }

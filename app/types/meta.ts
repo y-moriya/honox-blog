@@ -3,4 +3,5 @@ type Meta = {
   date: string;
   description: string;
   categories?: string[];
+  draft?: boolean;
 };
