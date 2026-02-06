@@ -25,6 +25,7 @@ export default jsxRenderer(({ children, title, frontmatter }) => {
 				<meta httpEquiv="content-language" content="ja" />
 				<meta charSet="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<meta name="description" content={description} />
 				{import.meta.env.PROD ? (
 					<>
 						<meta

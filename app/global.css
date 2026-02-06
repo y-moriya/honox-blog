@@ -77,11 +77,11 @@
 }
 
 .markdown h6 {
-  @apply leading-tight text-sm font-semibold text-gray-600 mb-4 mt-6;
+  @apply leading-tight text-sm font-semibold text-gray-700 mb-4 mt-6;
 }
 
 .markdown blockquote {
-  @apply text-base border-l-4 border-gray-200 pl-4 pr-4 text-gray-600;
+  @apply text-base border-l-4 border-gray-200 pl-4 pr-4 text-gray-700;
 }
 
 .markdown code {
@@ -105,7 +105,8 @@
 }
 
 .markdown kbd {
-  @apply text-xs inline-block rounded border px-1 py-5 align-middle font-normal font-mono shadow;
+  @apply text-xs inline-block rounded border px-1 py-5 align-middle font-normal
+    font-mono shadow;
 }
 
 .markdown table {
