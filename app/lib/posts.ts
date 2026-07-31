@@ -1,24 +1,41 @@
 import type { PaginatedPosts, Post } from "@/types/post";
+import type { Meta } from "@/types/meta";
+
+// モジュール読み込み時に一度だけ glob を実行
+const rawPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx", {
+  eager: true,
+});
+
+// 下書き以外の記事を取得し、日付降順で事前にソート
+const postsCache: Post[] = Object.entries(rawPosts)
+  .filter(([_, mod]) => !mod.frontmatter?.draft)
+  .map(([key, mod]) => ({
+    id: key.replace("../routes", ""),
+    frontmatter: mod.frontmatter,
+  }))
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).getTime() -
+      new Date(a.frontmatter.date).getTime(),
+  );
+
+// ID による高速 O(1) 検索用の Map
+const postMap = new Map<string, Post>(
+  postsCache.map((post) => [post.id, post]),
+);
 
 export function getAllPosts(): Post[] {
-  const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx", {
-    eager: true
-  });
-  const notDraftPosts = Object.entries(allPosts).filter(([_, mod]) => !mod.frontmatter.draft);
-  return notDraftPosts.map(([id, mod]) => {
-    return { id: id.replace('../routes', ''), frontmatter: mod.frontmatter };
-  });
+  return [...postsCache];
 }
 
 export function getPostById(id: string): Post {
-  const allPosts = import.meta.glob<{ frontmatter: Meta }>("../routes/posts/**/*.mdx", {
-    eager: true,
-  });
-  const post = Object.entries(allPosts).find(([key]) => key.includes(id));
+  // id が /posts/xxx 形式の場合と slug だけの場合の両方に対応
+  const lookupKey = id.startsWith("/posts/") ? id : `/posts/${id}`;
+  const post = postMap.get(lookupKey) || postMap.get(`${lookupKey}.mdx`) || postsCache.find((p) => p.id.includes(id));
   if (!post) {
     throw new Error(`Post not found: ${id}`);
   }
-  return { id: post[0].replace('../routes', ''), frontmatter: post[1].frontmatter };
+  return post;
 }
 
 export function getPaginatedPosts(page: number, perPage: number): PaginatedPosts {
@@ -27,31 +44,18 @@ export function getPaginatedPosts(page: number, perPage: number): PaginatedPosts
   const start = (page - 1) * perPage;
   const end = start + perPage;
 
-  // frontmatter.dateの降順でソート
-  allPosts.sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime(),
-  );
-
   return { posts: allPosts.slice(start, end), totalPage };
 }
 
 export function getCategorizedPosts(category: string): Post[] {
-  const allPosts = getAllPosts();
-
-  // frontmatter.dateの降順でソート
-  allPosts.sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime(),
+  return postsCache.filter((post) =>
+    post.frontmatter.categories?.includes(category),
   );
-
-  return allPosts.filter((post) => post.frontmatter.categories?.includes(category));
 }
 
 export function getCategories(): string[] {
-  const allPosts = getAllPosts();
-  const categories = allPosts.flatMap((post) => post.frontmatter.categories ?? []);
+  const categories = postsCache.flatMap(
+    (post) => post.frontmatter.categories ?? [],
+  );
   return Array.from(new Set(categories));
 }

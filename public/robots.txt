@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /og/
+
+Sitemap: https://gunjobiyori.com/rss.xml

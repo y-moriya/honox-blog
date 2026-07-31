@@ -9,15 +9,15 @@ export function Pagination({ currentPage, totalPage }: MyPaginationProps) {
 	for (let i = 1; i <= totalPage; i++) {
 		const active = i === currentPage ? "btn-active" : "";
 		pages.push(
-			<a href={`/page/${i}`}>
-				<button type="button" class={`join-item btn ${active}`}>
-					{i}
-				</button>
+			<a key={i} href={`/page/${i}`} class={`join-item btn ${active}`}>
+				{i}
 			</a>,
 		);
 	}
 
 	return (
-		<div class="join mt-8 mx-auto flex w-full justify-center">{pages}</div>
+		<nav aria-label="Pagination" class="join mt-8 mx-auto flex w-full justify-center">
+			{pages}
+		</nav>
 	);
 }
