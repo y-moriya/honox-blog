@@ -11,7 +11,7 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://0.gravatar.com; font-src 'self' https://fonts.gstatic.com; frame-src https://gravatar.com; connect-src 'self' https://www.google-analytics.com;
-  Cache-Control: public, max-age=3600, s-maxage=86400
+  Cache-Control: no-cache
 
 # 静的アセット（JS/CSS/フォント/画像）: 長期キャッシュ
 /static/*
