@@ -7,9 +7,7 @@ export default createRoute(async (c) => {
 
   // 投稿日の降順でソート
   posts.sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime(),
+    (a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime(),
   );
 
   const itemsXml = posts

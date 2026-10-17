@@ -1,4 +1,4 @@
-import { } from "hono";
+import {} from "hono";
 import type { Frontmatter } from "./types/frontmatter";
 
 type Head = {
@@ -19,9 +19,6 @@ declare module "hono" {
   }
   interface ContextRenderer {
     // biome-ignore lint/style/useShorthandFunctionType: <explanation>
-    (
-      content: string | Promise<string>,
-      head?: Head,
-    ): Response | Promise<Response>;
+    (content: string | Promise<string>, head?: Head): Response | Promise<Response>;
   }
 }

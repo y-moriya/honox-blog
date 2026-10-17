@@ -1,8 +1,8 @@
-import type { NotFoundHandler } from 'hono'
+import type { NotFoundHandler } from "hono";
 
 const handler: NotFoundHandler = (c) => {
-  c.status(404)
-  return c.render(<div>404 Not Found</div>)
-}
+  c.status(404);
+  return c.render(<div>404 Not Found</div>);
+};
 
-export default handler
+export default handler;
