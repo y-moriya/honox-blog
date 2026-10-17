@@ -1,4 +1,4 @@
-import daisyui from 'daisyui';
+import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -6,6 +6,6 @@ module.exports = {
   content: ["./app/**/*.{ts,tsx,mdx}"],
   plugins: [daisyui],
   daisyui: {
-    themes: ["nord"]
-  }
+    themes: ["nord"],
+  },
 };
